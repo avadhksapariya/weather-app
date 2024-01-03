@@ -1,7 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:weather_app/custom_card.dart';
+import 'package:weather_app/custom_weather_card.dart';
+
+import 'custom_info_card.dart';
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
@@ -73,13 +75,22 @@ class WeatherScreen extends StatelessWidget {
               height: 12,
             ),
             // misc. info.
-            const Placeholder(
-              fallbackHeight: 150,
+            const Text('Additional Information', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+            const SizedBox(
+              height: 6,
+            ),
+            const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                OtherInfoCard(),
+                OtherInfoCard(),
+                OtherInfoCard(),
+              ],
             ),
           ],
         ),
       ),
     );
   }
-
 }
+
