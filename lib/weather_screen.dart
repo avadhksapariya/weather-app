@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:weather_app/custom_card.dart';
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
@@ -18,6 +19,7 @@ class WeatherScreen extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             // main card
             SizedBox(
@@ -48,14 +50,27 @@ class WeatherScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(
-              height: 30,
+              height: 12,
             ),
             // card row
-            const Placeholder(
-              fallbackHeight: 150,
+            const Text('Weather Forecast', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+            const SizedBox(
+              height: 6,
+            ),
+            const SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  HourlyForecastCard(),
+                  HourlyForecastCard(),
+                  HourlyForecastCard(),
+                  HourlyForecastCard(),
+                  HourlyForecastCard(),
+                ],
+              ),
             ),
             const SizedBox(
-              height: 30,
+              height: 12,
             ),
             // misc. info.
             const Placeholder(
