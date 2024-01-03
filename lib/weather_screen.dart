@@ -1,9 +1,9 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:weather_app/custom_weather_card.dart';
+import 'package:weather_app/customs/custom_weather_card.dart';
 
-import 'custom_info_card.dart';
+import 'customs/custom_info_card.dart';
 
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
@@ -63,11 +63,11 @@ class WeatherScreen extends StatelessWidget {
               scrollDirection: Axis.horizontal,
               child: Row(
                 children: [
-                  HourlyForecastCard(),
-                  HourlyForecastCard(),
-                  HourlyForecastCard(),
-                  HourlyForecastCard(),
-                  HourlyForecastCard(),
+                  HourlyForecastCard(time: '09:00', icon: Icons.cloud, temperature: '301.17 °K',),
+                  HourlyForecastCard(time: '12:00', icon: Icons.cloud, temperature: '301.54 °K',),
+                  HourlyForecastCard(time: '15:00', icon: Icons.cloud, temperature: '301.11 °K',),
+                  HourlyForecastCard(time: '18:00', icon: Icons.cloud, temperature: '300.79 °K',),
+                  HourlyForecastCard(time: '21:00', icon: Icons.cloud, temperature: '300.23 °K',),
                 ],
               ),
             ),
@@ -82,9 +82,9 @@ class WeatherScreen extends StatelessWidget {
             const Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                OtherInfoCard(),
-                OtherInfoCard(),
-                OtherInfoCard(),
+                OtherInfoCard(icon: Icons.water_drop, label: 'Humidity', value: '97',),
+                OtherInfoCard(icon: Icons.air, label: 'Wind Speed', value: '7.67'),
+                OtherInfoCard(icon: Icons.beach_access, label: 'Pressure', value: '1006'),
               ],
             ),
           ],
