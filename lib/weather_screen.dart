@@ -37,7 +37,6 @@ class _WeatherScreenState extends State<WeatherScreen> {
       body: FutureBuilder(
         future: getCurrentWeather(),
         builder: (context, snapshot) {
-          print(snapshot);
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator.adaptive());
           }
@@ -90,19 +89,16 @@ class _WeatherScreenState extends State<WeatherScreen> {
                   height: 12,
                 ),
                 // card row
-                const Text('Weather Forecast', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
+                const Text('Hourly Forecast', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),),
                 const SizedBox(
                   height: 6,
                 ),
-                const SingleChildScrollView(
+                SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
-                      HourlyForecastCard(time: '09:00', icon: Icons.cloud, temperature: '301.17 °K',),
-                      HourlyForecastCard(time: '12:00', icon: Icons.cloud, temperature: '301.54 °K',),
-                      HourlyForecastCard(time: '15:00', icon: Icons.cloud, temperature: '301.11 °K',),
-                      HourlyForecastCard(time: '18:00', icon: Icons.cloud, temperature: '300.79 °K',),
-                      HourlyForecastCard(time: '21:00', icon: Icons.cloud, temperature: '300.23 °K',),
+                      for (int i = 0; i < 5; i++)
+                      HourlyForecastCard(time: data['list'][i+1]['dt'].toString(), icon: data['list'][i+1]['weather'][0]['main'] == 'Cloud' || data['list'][i+1]['weather'][0]['main'] == 'Rain' ? Icons.cloud : Icons.sunny, temperature: data['list'][i+1]['main']['temp'].toString(),),
                     ],
                   ),
                 ),
