@@ -17,12 +17,12 @@ class WeatherScreen extends StatefulWidget {
 }
 
 class _WeatherScreenState extends State<WeatherScreen> {
-  late double temp;
+  late Future<Map<String,dynamic>> weather;
 
   @override
   void initState() {
     super.initState();
-    getCurrentWeather();
+    weather = getCurrentWeather();
   }
 
   @override
@@ -32,11 +32,15 @@ class _WeatherScreenState extends State<WeatherScreen> {
         title: const Text("Weather App", style: TextStyle(fontWeight: FontWeight.bold),),
         centerTitle: true,
         actions: [
-          IconButton(onPressed: () {}, icon: const Icon(Icons.refresh),),
+          IconButton(onPressed: () {
+            setState(() {
+              weather = getCurrentWeather();
+            });
+          }, icon: const Icon(Icons.refresh),),
         ],
       ),
       body: FutureBuilder(
-        future: getCurrentWeather(),
+        future: weather,
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator.adaptive());
