@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:weather_app/customs/custom_weather_card.dart';
 import 'package:weather_app/secrets.dart';
 
@@ -93,13 +94,39 @@ class _WeatherScreenState extends State<WeatherScreen> {
                 const SizedBox(
                   height: 6,
                 ),
-                SingleChildScrollView(
+                /*SingleChildScrollView(
                   scrollDirection: Axis.horizontal,
                   child: Row(
                     children: [
                       for (int i = 0; i < 5; i++)
-                      HourlyForecastCard(time: data['list'][i+1]['dt'].toString(), icon: data['list'][i+1]['weather'][0]['main'] == 'Cloud' || data['list'][i+1]['weather'][0]['main'] == 'Rain' ? Icons.cloud : Icons.sunny, temperature: data['list'][i+1]['main']['temp'].toString(),),
+                      HourlyForecastCard(
+                        time: data['list'][i+1]['dt'].toString(),
+                        icon: data['list'][i+1]['weather'][0]['main'] == 'Cloud' || data['list'][i+1]['weather'][0]['main'] == 'Rain'
+                            ? Icons.cloud
+                            : Icons.sunny,
+                        temperature: data['list'][i+1]['main']['temp'].toString(),
+                      ),
                     ],
+                  ),
+                ),*/
+                // this loads all the elements instantly which cause too load to an app.
+                // therefore ListView Builder is used to make it lazy loading as it get scrolled to make it optimized.
+                SizedBox(
+                  height: 125,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: 5,
+                    itemBuilder: (context, index) {
+                      final hourlyForecast = data['list'][index+1];
+                      final hourlySky = hourlyForecast['weather'][0]['main'];
+                      final hourlyTemp = hourlyForecast['main']['temp'].toString();
+                      final hourlyTime = DateTime.parse(hourlyForecast['dt_txt']);
+                      return HourlyForecastCard(
+                          time: DateFormat.jm().format(hourlyTime),
+                          icon: hourlySky == 'Cloud' || hourlySky == 'Rain' ? Icons.cloud : Icons.sunny,
+                          temperature: hourlyTemp,
+                      );
+                    }
                   ),
                 ),
                 const SizedBox(
