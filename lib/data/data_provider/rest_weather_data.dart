@@ -7,7 +7,7 @@ class RESTWeatherData {
   final openWeatherApiKey = dotenv.get("KEY");
 
   Future<String?> getCurrentWeather(String city) async {
-    const String tag = 'get_current_weather';
+    const String tag = 'get_api_current_weather';
 
     final url = Uri.parse('https://api.openweathermap.org/data/2.5/forecast?q=$city&APPID=$openWeatherApiKey');
     log('$tag URL: GET: $url');

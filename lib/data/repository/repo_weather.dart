@@ -10,7 +10,7 @@ class RepoWeather {
   RepoWeather(this.restWeatherData);
 
   Future<ModelWeather?> getCurrentWeather() async {
-    const String tag = 'get_current_weather';
+    const String tag = 'repo_get_current_weather';
     ModelWeather? data;
     try {
       const city = 'Rajkot';

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:weather_app/bloc/weather_bloc.dart';
 import 'package:weather_app/data/data_provider/rest_weather_data.dart';
 import 'package:weather_app/data/repository/repo_weather.dart';
 import 'package:weather_app/presentation/screens/weather_screen.dart';
 
-void main() {
+Future<void> main() async {
+  await dotenv.load(fileName: "lib/.env");
   runApp(const MyApp());
 }
 
