@@ -18,7 +18,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
   @override
   void initState() {
     super.initState();
-    context.read<WeatherBloc>().add(WeatherFetched());
+    context.read<WeatherBloc>().add(WeatherFetched(city: 'Rajkot'));
   }
 
   @override
@@ -33,7 +33,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
         actions: [
           IconButton(
             onPressed: () {
-              context.read<WeatherBloc>().add(WeatherFetched());
+              context.read<WeatherBloc>().add(WeatherFetched(city: 'Rajkot'));
             },
             icon: const Icon(Icons.refresh),
           ),
@@ -47,6 +47,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
             final data = state.modelWeather;
 
             if (data != null) {
+              final currentLocation = data.city!.name;
               final currentTemp = data.list![0].main!.temp;
               final currentSky = data.list![0].weather![0].main;
               final currentPressure = data.list![0].main!.pressure;
@@ -75,7 +76,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                               child: Column(
                                 children: [
                                   Text(
-                                    '$currentTemp °K',
+                                    currentLocation!,
                                     style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
                                   ),
                                   const SizedBox(
@@ -89,7 +90,7 @@ class _WeatherScreenState extends State<WeatherScreen> {
                                     height: 10,
                                   ),
                                   Text(
-                                    currentSky!,
+                                    '$currentTemp °K - $currentSky',
                                     style: const TextStyle(fontSize: 24),
                                   ),
                                 ],

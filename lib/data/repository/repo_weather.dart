@@ -9,11 +9,10 @@ class RepoWeather {
 
   RepoWeather(this.restWeatherData);
 
-  Future<ModelWeather?> getCurrentWeather() async {
+  Future<ModelWeather?> getCurrentWeather(String city) async {
     const String tag = 'repo_get_current_weather';
     ModelWeather? data;
     try {
-      const city = 'Rajkot';
       final weatherData = await restWeatherData.getCurrentWeather(city);
 
       final decodedResult = jsonDecode(weatherData!);
